@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/node": "^9.0.0",
     "@astrojs/react": "^4.2.0",
-    "@astrojs/vercel": "^10.0.7",
+    "@astrojs/vercel": "^9.0.5",
     "@fontsource/dm-sans": "^5.2.8",
     "@fontsource/playfair-display": "^5.2.8",
     "@hookform/resolvers": "^5.2.1",
