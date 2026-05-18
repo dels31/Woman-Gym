@@ -1,7 +1,10 @@
 ---
+export const prerender = false;
 import Layout from '../layouts/Layout.astro';
 import CTABanner from '../components/home/CTABanner.astro';
 import { GYM_NAME } from '../lib/constants';
+import { db } from '../lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 import { ArrowRight, Clock, Activity, CalendarDays } from 'lucide-react';
 
 const programs = [
@@ -37,16 +40,42 @@ const programs = [
   }
 ];
 
-const schedule = [
-  { day: 'Senin', time: '16:30', class: 'Zumba Fiesta', trainer: 'Coach Didi', duration: '60 Menit' },
-  { day: 'Senin', time: '18:00', class: 'Booty & Core', trainer: 'Coach Sarah', duration: '45 Menit' },
-  { day: 'Selasa', time: '16:30', class: 'Yoga Flexibility', trainer: 'Coach Rina', duration: '50 Menit' },
-  { day: 'Selasa', time: '19:00', class: 'Fat Loss Blueprint', trainer: 'Coach Sarah', duration: '60 Menit' },
-  { day: 'Rabu', time: '17:00', class: 'HIIT Blast', trainer: 'Coach Nisa', duration: '40 Menit' },
-  { day: 'Kamis', time: '16:30', class: 'Zumba Fiesta', trainer: 'Coach Didi', duration: '60 Menit' },
-  { day: 'Jumat', time: '16:00', class: 'Upper Body Toning', trainer: 'Coach Sarah', duration: '45 Menit' },
-  { day: 'Senin', time: '08:00', class: 'Morning Yoga', trainer: 'Coach Rina', duration: '60 Menit' },
-];
+let schedule: any[] = [];
+try {
+  const scheduleSnapshot = await getDocs(collection(db, 'schedules'));
+  const dayOrder: Record<string, number> = { 'Senin': 1, 'Selasa': 2, 'Rabu': 3, 'Kamis': 4, 'Jumat': 5, 'Sabtu': 6, 'Minggu': 7 };
+  schedule = scheduleSnapshot.docs.map(doc => ({
+    id: doc.id,
+    day: doc.data().day,
+    time: doc.data().time,
+    class: doc.data().class,
+    trainer: doc.data().trainer,
+    duration: doc.data().duration
+  })).sort((a, b) => {
+    if (dayOrder[a.day] !== dayOrder[b.day]) return dayOrder[a.day] - dayOrder[b.day];
+    return a.time.localeCompare(b.time);
+  });
+} catch (error) {
+  console.error("Error fetching schedule", error);
+}
+
+// Fallback jika kosong
+if (schedule.length === 0) {
+  schedule = [
+    { day: 'Senin', time: '16:30', class: 'Zumba Fiesta', trainer: 'Coach Didi', duration: '60 Menit' },
+    { day: 'Senin', time: '18:00', class: 'Booty & Core', trainer: 'Coach Sarah', duration: '45 Menit' },
+    { day: 'Selasa', time: '16:30', class: 'Yoga Flexibility', trainer: 'Coach Rina', duration: '50 Menit' },
+    { day: 'Selasa', time: '19:00', class: 'Fat Loss Blueprint', trainer: 'Coach Sarah', duration: '60 Menit' },
+    { day: 'Rabu', time: '17:00', class: 'HIIT Blast', trainer: 'Coach Nisa', duration: '40 Menit' },
+    { day: 'Kamis', time: '16:30', class: 'Zumba Fiesta', trainer: 'Coach Didi', duration: '60 Menit' },
+    { day: 'Jumat', time: '16:00', class: 'Upper Body Toning', trainer: 'Coach Sarah', duration: '45 Menit' },
+    { day: 'Senin', time: '08:00', class: 'Morning Yoga', trainer: 'Coach Rina', duration: '60 Menit' },
+  ].sort((a, b) => {
+    const dayOrder: Record<string, number> = { 'Senin': 1, 'Selasa': 2, 'Rabu': 3, 'Kamis': 4, 'Jumat': 5, 'Sabtu': 6, 'Minggu': 7 };
+    if (dayOrder[a.day] !== dayOrder[b.day]) return dayOrder[a.day] - dayOrder[b.day];
+    return a.time.localeCompare(b.time);
+  });
+}
 ---
 
 <Layout title={`Program & Kelas | ${GYM_NAME}`} description="Daftar kelas fitness, jadwal mingguan, dan program pelatihan di gym khusus wanita Banjarmasin.">

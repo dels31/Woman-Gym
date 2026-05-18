@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null && (request.auth.token.email == 'bapuk1331@gmail.com' || exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+
+    function isValidSchedule(data) {
+      return data.keys().hasAll(['day', 'time', 'class', 'trainer', 'duration', 'createdAt', 'updatedAt']) 
+        && data.day is string && data.day.size() > 0 && data.day.size() <= 64
+        && data.time is string && data.time.size() > 0 && data.time.size() <= 64
+        && data.class is string && data.class.size() > 0 && data.class.size() <= 128
+        && data.trainer is string && data.trainer.size() > 0 && data.trainer.size() <= 128
+        && data.duration is string && data.duration.size() > 0 && data.duration.size() <= 64
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp;
+    }
+
+    match /schedules/{scheduleId} {
+      allow list: if true;
+      allow get: if true;
+      
+      allow create: if isAdmin() 
+                    && isValidId(scheduleId)
+                    && isValidSchedule(incoming())
+                    && incoming().keys().size() == 7
+                    && incoming().createdAt == request.time
+                    && incoming().updatedAt == request.time;
+      allow update: if isAdmin() 
+                    && isValidId(scheduleId)
+                    && isValidSchedule(incoming())
+                    && incoming().keys().size() == 7
+                    && incoming().createdAt == existing().createdAt
+                    && incoming().updatedAt == request.time;
+      allow delete: if isAdmin() && isValidId(scheduleId);
+    }
+
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

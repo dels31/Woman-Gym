@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ScheduleManager from '../../components/admin/ScheduleManager';
+import { GYM_NAME } from '../../lib/constants';
+---
+
+<Layout title={`Admin Jadwal | ${GYM_NAME}`} description="CMS Manajemen Jadwal Kelas Reguler">
+  <div class="bg-brand-light min-h-screen pb-20">
+    <div class="bg-brand-dark py-12">
+      <div class="container-brand text-center text-white">
+        <h1 class="text-3xl md:text-4xl font-display font-bold">Admin Panel</h1>
+      </div>
+    </div>
+    
+    <div class="-mt-6 relative z-10">
+      <ScheduleManager client:only="react" />
+    </div>
+  </div>
+</Layout>

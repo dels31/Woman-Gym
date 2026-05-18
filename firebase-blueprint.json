@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "Schedule": {
+      "title": "Class Schedule",
+      "description": "Regular class schedule entry",
+      "type": "object",
+      "properties": {
+        "day": { "type": "string" },
+        "time": { "type": "string" },
+        "class": { "type": "string" },
+        "trainer": { "type": "string" },
+        "duration": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["day", "time", "class", "trainer", "duration", "createdAt", "updatedAt"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Admin users for RBAC",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/schedules/{scheduleId}": {
+      "schema": { "$ref": "#/entities/Schedule" },
+      "description": "Stores all class schedules."
+    },
+    "/admins/{uid}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Stores admin users."
+    }
+  }
+}
