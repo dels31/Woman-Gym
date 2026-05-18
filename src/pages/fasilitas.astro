@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTABanner from '../components/home/CTABanner.astro';
+import { GYM_NAME } from '../lib/constants';
+
+const facilityCategories = [
+  {
+    title: 'Ruang Latihan Utama',
+    desc: 'Area cardio dan strength equipment standar komersial yang luas dan nyaman.',
+    features: ['Treadmill & Elliptical', 'Free Weights Area', 'Smith Machine', 'Lat Pulldown & Rowing'],
+    images: [
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=600&h=400&fit=crop',
+    ]
+  },
+  {
+    title: 'Studio Kelas Indoor',
+    desc: 'Ruangan khusus kedap suara berlapis matras dan cermin penuh untuk kelas grup.',
+    features: ['Full AC Central', 'High Quality Sound System', 'Yoga Mats & Perlengkapan', 'Lantai Kayu Anti-Slip'],
+    images: [
+      'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=600&h=400&fit=crop',
+    ]
+  },
+  {
+    title: 'Locker & Sauna Room',
+    desc: 'Area relaksasi dan ruang bilas yang mengutamakan privasi penuh.',
+    features: ['Sauna Tradisional Berkayu', 'Shower Air Panas/Dingin', 'Locker Berkunci', 'Hairdryer & Kaca Rias'],
+    images: [
+      'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&h=400&fit=crop',
+      'https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=600&h=400&fit=crop',
+    ]
+  }
+];
+
+const highlights = [
+  { icon: '❄️', name: 'AC Central' },
+  { icon: '🧖‍♀️', name: 'Sauna Area' },
+  { icon: '🚿', name: 'Locker & Shower' },
+  { icon: '📶', name: 'Free WiFi' },
+  { icon: '🅿️', name: 'Parkir Luas' },
+  { icon: '🎥', name: 'Kamera CCTV Keamanan' },
+];
+---
+
+<Layout title={`Fasilitas Gym | ${GYM_NAME}`} description="Pelajari lebih detail tentang fasilitas premium yang tersedia di gym khusus wanita Banjarmasin.">
+  <div class="bg-brand-dark py-20 mt-[-80px] pt-[120px]">
+    <div class="container-brand text-center text-white">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">Fasilitas Nyaman & Lengkap</h1>
+      <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-light">
+        Didesain secara spesifik untuk mengakomodasi kebutuhan wanita dalam berolahraga tanpa kompromi kualitas.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-padding bg-brand-primary-bg/20">
+    <div class="container-brand">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {highlights.map((h) => (
+          <div class="bg-white rounded-xl p-4 text-center shadow-sm border border-brand-primary/10">
+            <div class="text-3xl mb-2">{h.icon}</div>
+            <div class="font-bold text-sm text-brand-dark">{h.name}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {facilityCategories.map((cat, index) => (
+    <section class={`py-16 md:py-24 ${index % 2 === 0 ? 'bg-white' : 'bg-brand-light'}`}>
+      <div class="container-brand">
+        <div class="flex flex-col lg:flex-row gap-12 items-center">
+          <div class={`w-full lg:w-1/3 ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
+            <h2 class="text-3xl font-display font-bold text-brand-dark mb-4">{cat.title}</h2>
+            <p class="text-brand-body leading-relaxed mb-6">{cat.desc}</p>
+            <ul class="space-y-3 relative mb-8">
+              {cat.features.map(f => (
+                <li class="flex items-center text-sm font-medium text-brand-dark">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brand-primary mr-3 inline-block"></span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class={`w-full lg:w-2/3 ${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
+            <div class={`grid gap-4 ${cat.images.length === 3 ? 'grid-cols-2 grid-rows-2' : 'grid-cols-2'}`}>
+              {cat.images.map((img, i) => (
+                <div class={`rounded-xl overflow-hidden shadow-brand-md ${cat.images.length === 3 && i === 0 ? 'col-span-2 md:col-span-1 md:row-span-2' : ''}`}>
+                  <img src={img} alt={`Fasilitas ${cat.title}`} loading="lazy" class="w-full h-full object-cover min-h-[200px] hover:scale-105 transition-transform duration-500" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CTABanner />
+</Layout>

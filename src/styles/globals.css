@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #c2185b;
+  --color-brand-primary-light: #f48fb1;
+  --color-brand-primary-bg: #fce4ec;
+  --color-brand-dark: #1a1a2e;
+  --color-brand-body: #4a4a68;
+  --color-brand-light: #f9f5f7;
+  --color-brand-white: #ffffff;
+  --color-brand-success: #2e7d32;
+  --color-brand-error: #c62828;
+
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+@layer base {
+  :root {
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+    
+    --section-padding-y-mobile: 3rem; /* 48px */
+    --section-padding-y-desktop: 5rem; /* 80px */
+    --container-max-width: 75rem; /* 1200px */
+    --container-gutter: 1.5rem; /* 24px */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-brand-light);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-brand-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--color-brand-dark);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-brand {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: var(--container-max-width);
+    padding-left: var(--container-gutter);
+    padding-right: var(--container-gutter);
+  }
+
+  .section-padding {
+    padding-top: var(--section-padding-y-mobile);
+    padding-bottom: var(--section-padding-y-mobile);
+  }
+  
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: var(--section-padding-y-desktop);
+      padding-bottom: var(--section-padding-y-desktop);
+    }
+  }
+}

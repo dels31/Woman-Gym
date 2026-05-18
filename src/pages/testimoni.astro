@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTABanner from '../components/home/CTABanner.astro';
+import { GYM_NAME } from '../lib/constants';
+import { Star, Quote } from 'lucide-react';
+
+const testimonials = [
+  { name: 'Sarah', since: '2023', category: 'Penurunan Berat', rating: 5, quote: 'Awalnya ragu ke gym karena takut dilihat cowok. Di sini nyaman banget! Apalagi ada kelas Zumba tiap sore, pas pulang kerja langsung olahraga.' },
+  { name: 'Nisa', since: '2022', category: 'Pembentukan', rating: 5, quote: 'Trainer-nya super sabar ngajarin form yang bener buat pemula kayak aku. Alhamdulillah udah turun 8kg dalam 4 bulan.' },
+  { name: 'Amalia', since: '2024', category: 'Kebugaran', rating: 5, quote: 'Fasilitas saunanya the best! Alat-alat juga lengkap dan bersih. Nggak nyesel ambil langganan tahunan langsung.' },
+  { name: 'Dini', since: '2023', category: 'Komunitas', rating: 5, quote: 'Bukan cuma dapet badan sehat, tapi dapet temen-temen baru yang positif banget saling nyemangatin. Love it!' },
+  { name: 'Fitri', since: '2021', category: 'Penurunan Berat', rating: 4, quote: 'Turun 15kg dalam setahun join program Fat Loss Blueprint. Hasilnya nyata asal kita disiplin, dan tempatnya ngedukung.' },
+  { name: 'Rina', since: '2024', category: 'Kebugaran', rating: 5, quote: 'Dulu mager banget olahraga, tapi karena suasananya enak dan semua cewek, jadi nggak risih buat banyak nanya alat ke trainer.' }
+];
+---
+
+<Layout title={`Testimoni Member | ${GYM_NAME}`} description="Apa kata mereka yang telah bergabung dan membuktikan hasilnya di gym kami.">
+  <div class="bg-brand-dark py-20 mt-[-80px] pt-[120px]">
+    <div class="container-brand text-center text-white">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">Kisah Nyata, Hasil Nyata.</h1>
+      <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-light">
+        Lebih dari 2.000 wanita telah memilih kami sebagai partner perjalanan fitness mereka.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-padding bg-brand-light">
+    <div class="container-brand relative z-10">
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <span class="bg-brand-primary text-white text-sm font-bold px-4 py-2 rounded-full cursor-pointer">Semua Review</span>
+        {['Penurunan Berat', 'Pembentukan', 'Kebugaran', 'Komunitas'].map(tag => (
+          <span class="bg-white text-brand-dark border border-gray-200 text-sm font-bold px-4 py-2 rounded-full cursor-pointer hover:border-brand-primary hover:text-brand-primary transition-colors">{tag}</span>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {testimonials.map(t => (
+          <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-brand-md transition-all group relative">
+            <Quote class="absolute top-6 right-6 text-brand-primary-bg opacity-50 group-hover:text-brand-primary/10 transition-colors" size={48} />
+            <div class="flex mb-4">
+              {[...Array(t.rating)].map(() => <Star class="text-[#FFB800] fill-[#FFB800] w-4 h-4 mr-1" />)}
+            </div>
+            <p class="text-brand-body italic leading-relaxed mb-6 font-display">"{t.quote}"</p>
+            <div class="flex items-center mt-auto">
+              <div class="w-10 h-10 bg-brand-primary-bg rounded-full flex items-center justify-center text-brand-primary font-bold text-lg mr-4">
+                {t.name.charAt(0)}
+              </div>
+              <div>
+                <h4 class="font-bold text-brand-dark leading-tight">{t.name}</h4>
+                <div class="text-xs text-brand-body/70 mt-1">{t.category} • Sejak {t.since}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</Layout>

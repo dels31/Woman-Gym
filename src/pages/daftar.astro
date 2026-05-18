@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RegistrationForm from '../components/forms/RegistrationForm';
+import { GYM_NAME } from '../lib/constants';
+---
+
+<Layout title={`Daftar Trial & Membership | ${GYM_NAME}`} description="Daftar trial gratis atau pilih paket membership gym khusus wanita di Banjarmasin.">
+  <section class="bg-brand-primary/5 py-12 md:py-20 relative">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-primary-light/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 bg-brand-primary/10 rounded-full blur-2xl"></div>
+
+    <div class="container-brand relative z-10">
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <h1 class="text-4xl md:text-5xl font-display font-bold text-brand-dark mb-4">Bergabung Bersama Kami</h1>
+        <p class="text-lg text-brand-body">
+          Langkah pertama menuju versi diri Anda yang lebih sehat dan kuat. Isi form di bawah ini dan admin kami akan segera menghubungi Anda.
+        </p>
+      </div>
+
+      <div class="max-w-2xl mx-auto">
+        <RegistrationForm client:load />
+      </div>
+    </div>
+  </section>
+</Layout>

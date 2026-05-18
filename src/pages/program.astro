@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTABanner from '../components/home/CTABanner.astro';
+import { GYM_NAME } from '../lib/constants';
+import { ArrowRight, Clock, Activity, CalendarDays } from 'lucide-react';
+
+const programs = [
+  {
+    title: 'Fat Loss Blueprint', category: 'Cardio', duration: '60 mnt', level: 'Pemula',
+    desc: 'Kardio intensitas sedang khusus anatomi wanita.',
+    img: 'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=400&h=300&fit=crop'
+  },
+  {
+    title: 'Booty & Core Building', category: 'Strength', duration: '45 mnt', level: 'Menengah',
+    desc: 'Pembentukan gluteus dan penguatan postur tubuh rata.',
+    img: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=400&h=300&fit=crop'
+  },
+  {
+    title: 'Zumba Fiesta', category: 'Group Class', duration: '60 mnt', level: 'Pemula',
+    desc: 'Dance cardio yang menyenangkan. Bakar 500+ kalori per sesi.',
+    img: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=400&h=300&fit=crop'
+  },
+  {
+    title: 'Yoga Flexibility', category: 'Flexibility', duration: '50 mnt', level: 'Semua',
+    desc: 'Melatih pernapasan, relaksasi otot dan fleksibilitas.',
+    img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=400&h=300&fit=crop'
+  },
+  {
+    title: 'HIIT Blast', category: 'Cardio', duration: '40 mnt', level: 'Lanjutan',
+    desc: 'Latihan interval intensitas tinggi untuk metabolisme super.',
+    img: 'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?q=80&w=400&h=300&fit=crop'
+  },
+  {
+    title: 'Upper Body Toning', category: 'Strength', duration: '45 mnt', level: 'Menengah',
+    desc: 'Mengencangkan lengan, pundak, dan otot punggung tanpa terlihat bulky.',
+    img: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=400&h=300&fit=crop'
+  }
+];
+
+const schedule = [
+  { day: 'Senin', time: '16:30', class: 'Zumba Fiesta', trainer: 'Coach Didi', duration: '60 Menit' },
+  { day: 'Senin', time: '18:00', class: 'Booty & Core', trainer: 'Coach Sarah', duration: '45 Menit' },
+  { day: 'Selasa', time: '16:30', class: 'Yoga Flexibility', trainer: 'Coach Rina', duration: '50 Menit' },
+  { day: 'Selasa', time: '19:00', class: 'Fat Loss Blueprint', trainer: 'Coach Sarah', duration: '60 Menit' },
+  { day: 'Rabu', time: '17:00', class: 'HIIT Blast', trainer: 'Coach Nisa', duration: '40 Menit' },
+  { day: 'Kamis', time: '16:30', class: 'Zumba Fiesta', trainer: 'Coach Didi', duration: '60 Menit' },
+  { day: 'Jumat', time: '16:00', class: 'Upper Body Toning', trainer: 'Coach Sarah', duration: '45 Menit' },
+  { day: 'Senin', time: '08:00', class: 'Morning Yoga', trainer: 'Coach Rina', duration: '60 Menit' },
+];
+---
+
+<Layout title={`Program & Kelas | ${GYM_NAME}`} description="Daftar kelas fitness, jadwal mingguan, dan program pelatihan di gym khusus wanita Banjarmasin.">
+  <div class="bg-brand-dark py-20 mt-[-80px] pt-[120px]">
+    <div class="container-brand text-center text-white">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">Program & Kelas Kami</h1>
+      <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-light">
+        Ribuan kalori dibakar, jutaan rasa percaya diri dibangun. Temukan program yang sesuai dengan goals kebugaranmu.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-padding bg-brand-light">
+    <div class="container-brand">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {programs.map((program) => (
+          <div class="bg-white rounded-2xl overflow-hidden shadow-brand-sm hover:shadow-brand-md transition-all group border border-gray-100 flex flex-col">
+            <div class="relative h-56 overflow-hidden">
+              <img src={program.img} alt={program.title} loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute top-4 left-4 bg-brand-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                {program.category}
+              </div>
+            </div>
+            <div class="p-6 flex-grow flex flex-col">
+              <h4 class="text-xl font-bold font-display text-brand-dark mb-3">{program.title}</h4>
+              <div class="flex items-center gap-4 mb-4 text-xs font-medium text-brand-body/70">
+                <span class="flex items-center bg-gray-50 px-2 py-1 rounded"><Clock size={14} class="mr-1.5" /> {program.duration}</span>
+                <span class="flex items-center bg-gray-50 px-2 py-1 rounded"><Activity size={14} class="mr-1.5" /> {program.level}</span>
+              </div>
+              <p class="text-brand-body text-sm leading-relaxed flex-grow mb-6">{program.desc}</p>
+              <a href="/daftar" class="w-full text-center bg-brand-primary/10 text-brand-primary py-3 rounded-xl font-bold group-hover:bg-brand-primary group-hover:text-white transition-colors">
+                Daftar Sekarang
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-white relative">
+    <div class="container-brand">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-4">Jadwal Kelas Reguler</h2>
+        <p class="text-brand-body">Jadwal dapat berubah di hari libur nasional. Hubungi admin untuk konfirmasi ketersediaan slot kelas harian.</p>
+      </div>
+
+      <div class="bg-white border text-center border-gray-200 rounded-2xl overflow-hidden shadow-sm overflow-x-auto">
+        <table class="w-full text-left min-w-[800px]">
+          <thead class="bg-brand-primary text-white">
+            <tr>
+              <th class="py-4 px-6 font-semibold">Hari</th>
+              <th class="py-4 px-6 font-semibold">Waktu</th>
+              <th class="py-4 px-6 font-semibold">Nama Kelas</th>
+              <th class="py-4 px-6 font-semibold">Trainer</th>
+              <th class="py-4 px-6 font-semibold">Durasi</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            {schedule.map((slot, index) => (
+              <tr class={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="py-4 px-6 font-medium text-brand-dark">{slot.day}</td>
+                <td class="py-4 px-6 text-brand-body"><span class="bg-gray-100 px-2 py-1 rounded text-sm">{slot.time}</span></td>
+                <td class="py-4 px-6 font-bold text-brand-primary">{slot.class}</td>
+                <td class="py-4 px-6 text-brand-body">{slot.trainer}</td>
+                <td class="py-4 px-6 text-brand-body">{slot.duration}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="mt-8 text-center text-sm text-gray-500 bg-gray-50 inline-block px-4 py-2 rounded-lg border border-gray-100 mx-auto w-full md:w-auto">
+        <span class="font-medium">Jadwal Operasional Bebas (Tanpa Kelas):</span> Senin-Jumat (06.00-21.00), Sabtu (07.00-20.00), Minggu (08.00-17.00)
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</Layout>

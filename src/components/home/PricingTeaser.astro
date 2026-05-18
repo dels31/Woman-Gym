@@ -1,0 +1,82 @@
+---
+import { Check } from 'lucide-react';
+
+const packages = [
+  {
+    name: 'Bulanan',
+    price: 'Rp 250.000',
+    period: '/ bulan',
+    recommended: false,
+    features: [
+      'Akses semua fasilitas gym',
+      'Bebas ikut kelas grup (Zumba, dll)',
+      'Akses Sauna',
+      'Locker room & Shower',
+      'Masa aktif 30 hari'
+    ]
+  },
+  {
+    name: '3 Bulan',
+    price: 'Rp 650.000',
+    period: '/ 3 bulan',
+    recommended: true,
+    badge: 'Paling Hemat',
+    features: [
+      'Semua fasilitas Paket Bulanan',
+      'Hemat Rp 100.000',
+      '1x Sesi Personal Training (Gratis)',
+      'Prioritas booking jadwal kelas',
+      'Masa aktif 90 hari'
+    ]
+  }
+];
+---
+
+<section class="section-padding bg-white relative">
+  <div class="absolute top-0 right-0 w-1/3 h-full bg-brand-primary-bg/30 rounded-l-full hidden lg:block -z-10"></div>
+
+  <div class="container-brand">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <h2 class="text-sm font-bold text-brand-primary tracking-wider uppercase mb-2">Membership</h2>
+      <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-4">Investasi Kesehatan Anda</h3>
+      <p class="text-brand-body leading-relaxed">Tanpa biaya pendaftaran tersembunyi. Pilih paket yang sesuai dengan goals kebugaran Anda.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:max-w-4xl mx-auto gap-8 relative z-10">
+      {packages.map((pkg) => (
+        <div class={`rounded-3xl p-8 border ${pkg.recommended ? 'border-brand-primary shadow-brand-lg relative bg-brand-dark text-white' : 'border-gray-200 bg-white shadow-brand-sm'}`}>
+          {pkg.recommended && (
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-primary text-white text-xs font-bold uppercase tracking-wide py-1.5 px-4 rounded-full shadow-md">
+              {pkg.badge}
+            </div>
+          )}
+          
+          <h4 class={`text-xl font-display font-bold mb-2 ${pkg.recommended ? 'text-white' : 'text-brand-dark'}`}>{pkg.name}</h4>
+          <div class="flex items-baseline mb-8">
+            <span class={`text-4xl font-bold font-display mr-2 ${pkg.recommended ? 'text-white' : 'text-brand-primary'}`}>{pkg.price}</span>
+            <span class={`text-sm ${pkg.recommended ? 'text-white/70' : 'text-gray-500'}`}>{pkg.period}</span>
+          </div>
+          
+          <ul class="space-y-4 mb-8">
+            {pkg.features.map((feature) => (
+              <li class="flex items-start">
+                <Check size={20} class={`mr-3 shrink-0 ${pkg.recommended ? 'text-brand-primary-light' : 'text-brand-primary'}`} />
+                <span class={`text-sm ${pkg.recommended ? 'text-white/90' : 'text-brand-body'}`}>{feature}</span>
+              </li>
+            ))}
+          </ul>
+          
+          <a href="/daftar" class={`block w-full text-center py-4 rounded-xl font-bold transition-all ${pkg.recommended ? 'bg-brand-primary text-white hover:bg-brand-primary-light shadow-md hover:-translate-y-1' : 'bg-brand-light text-brand-dark hover:bg-gray-100'}`}>
+            Pilih Paket {pkg.name}
+          </a>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-12 text-center">
+      <a href="/harga" class="text-brand-primary font-medium hover:underline">
+        Lihat daftar harga lengkap & FAQ
+      </a>
+    </div>
+  </div>
+</section>

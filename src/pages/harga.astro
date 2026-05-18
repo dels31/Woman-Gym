@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PricingTeaser from '../components/home/PricingTeaser.astro';
+import CTABanner from '../components/home/CTABanner.astro';
+import { GYM_NAME } from '../lib/constants';
+import { Plus, Minus } from 'lucide-react';
+
+const faq = [
+  {
+    q: 'Apakah ada biaya tambahan untuk pendaftaran member baru?',
+    a: 'Tidak ada. Harga yang tertera adalah harga bersih. Anda tidak dikenakan biaya tambahan seperti uang pangkal atau kartu registrasi.'
+  },
+  {
+    q: 'Bolehkah saya membawa teman yang bukan member?',
+    a: 'Boleh, teman Anda dapat menggunakan fasilitas dengan membayar biaya kedatangan harian (Daily Pass) sebesar Rp 50.000 per kunjungan.'
+  },
+  {
+    q: 'Bagaimana cara pause membership (cuti)?',
+    a: 'Fasilitas pause (cuti) hanya berlaku untuk member tahunan (maksimal 1 bulan freeze). Paket bulanan dan 3-bulan tidak dapat di-pause.'
+  },
+  {
+    q: 'Apakah paket sudah termasuk kelas senam / grup?',
+    a: 'Ya! Semua member aktif (Bulanan, 3 Bulan, atau Tahunan) bebas mengikuti kelas grup apapun sesuai jadwal tanpa biaya tambahan.'
+  },
+  {
+    q: 'Bagaimana cara mendaftar trial gratis?',
+    a: 'Cukup isi form di halaman "Daftar Trial" dan tunjukkan pesan konfirmasi ke receptionist kami pada kunjungan pertama Anda. Berlaku 1 harian full akses fasilitas gym.'
+  }
+];
+---
+
+<Layout title={`Harga Paket Membership | ${GYM_NAME}`} description="Investasi kesehatan dengan harga terjangkau. Tidak ada biaya admin.">
+  <div class="bg-brand-dark py-20 mt-[-80px] pt-[120px]">
+    <div class="container-brand text-center text-white">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">Paket Membership</h1>
+      <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-light">
+        Harga transparan tanpa biaya pendaftaran siluman.
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <PricingTeaser />
+  </div>
+
+  <section class="section-padding bg-brand-light pb-24">
+    <div class="container-brand max-w-3xl">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-4">Pertanyaan Seputar Harga & Membership</h2>
+      </div>
+
+      <div class="space-y-4">
+        {faq.map((item, i) => (
+          <details class="group bg-white rounded-2xl border border-gray-100 shadow-sm [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+            <summary class="flex items-center justify-between p-6 font-bold text-brand-dark cursor-pointer list-none text-lg">
+              {item.q}
+              <span class="relative flex-shrink-0 ml-1.5 w-5 h-5">
+                <Plus size={20} class="absolute inset-0 opacity-100 group-open:opacity-0 text-brand-primary" />
+                <Minus size={20} class="absolute inset-0 opacity-0 group-open:opacity-100 text-brand-primary" />
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-brand-body leading-relaxed animate-in slide-in-from-top-2 fade-in duration-200">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</Layout>

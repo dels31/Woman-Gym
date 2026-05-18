@@ -1,0 +1,31 @@
+---
+import { MessageCircle, FileText } from 'lucide-react';
+import { WA_LINK } from '../../lib/constants';
+
+const currentPath = Astro.url.pathname;
+const isDaftarPage = currentPath === '/daftar' || currentPath === '/daftar/';
+---
+
+{!isDaftarPage && (
+  <div class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-40 pb-safe shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+    <div class="flex">
+      <a 
+        href={WA_LINK} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="flex-1 flex flex-col items-center justify-center py-3 text-[#25D366] hover:bg-gray-50 active:bg-gray-100 transition-colors"
+      >
+        <MessageCircle size={20} class="mb-1" />
+        <span class="text-xs font-medium">Chat</span>
+      </a>
+      <div class="w-px bg-gray-200 my-2"></div>
+      <a 
+        href="/daftar" 
+        class="flex-1 flex flex-col items-center justify-center py-3 text-brand-primary hover:bg-gray-50 active:bg-gray-100 transition-colors"
+      >
+        <FileText size={20} class="mb-1" />
+        <span class="text-xs font-medium">Daftar Trial</span>
+      </a>
+    </div>
+  </div>
+)}

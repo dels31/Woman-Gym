@@ -1,0 +1,65 @@
+---
+import { GYM_NAME, TAGLINE, IG_HANDLE, FULL_ADDRESS, WA_LINK, GYM_EMAIL } from '../../lib/constants';
+import { MapPin, Phone, Mail, Instagram } from 'lucide-react';
+---
+
+<footer class="bg-brand-dark text-brand-light pt-16 pb-8">
+  <div class="container-brand grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+    <div class="md:col-span-1">
+      <a href="/" class="text-2xl font-display font-bold text-brand-primary-light mb-4 block">
+        {GYM_NAME}
+      </a>
+      <p class="text-brand-light/80 mb-6">
+        {TAGLINE}
+      </p>
+      <div class="flex space-x-4">
+        <a href={`https://instagram.com/${IG_HANDLE.replace('@', '')}`} target="_blank" rel="noopener noreferrer" class="text-brand-light hover:text-brand-primary-light transition-colors">
+          <Instagram size={20} />
+          <span class="sr-only">Instagram</span>
+        </a>
+      </div>
+    </div>
+    
+    <div>
+      <h3 class="font-display text-lg font-bold mb-4 text-white">Menu Cepat</h3>
+      <ul class="space-y-2">
+        <li><a href="/program" class="text-brand-light/80 hover:text-brand-primary-light transition-colors">Program & Kelas</a></li>
+        <li><a href="/fasilitas" class="text-brand-light/80 hover:text-brand-primary-light transition-colors">Fasilitas</a></li>
+        <li><a href="/harga" class="text-brand-light/80 hover:text-brand-primary-light transition-colors">Harga Paket</a></li>
+        <li><a href="/testimoni" class="text-brand-light/80 hover:text-brand-primary-light transition-colors">Testimoni Member</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <h3 class="font-display text-lg font-bold mb-4 text-white">Bantuan</h3>
+      <ul class="space-y-2">
+        <li><a href="/tentang-kami" class="text-brand-light/80 hover:text-brand-primary-light transition-colors">Tentang Kami</a></li>
+        <li><a href="/kontak" class="text-brand-light/80 hover:text-brand-primary-light transition-colors">Hubungi Kami</a></li>
+        <li><a href="/daftar" class="text-brand-light/80 hover:text-brand-primary-light transition-colors">Daftar Trial Gratis</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <h3 class="font-display text-lg font-bold mb-4 text-white">Kontak</h3>
+      <ul class="space-y-4">
+        <li class="flex items-start">
+          <MapPin size={20} class="text-brand-primary-light mr-3 mt-1 shrink-0" />
+          <span class="text-brand-light/80">{FULL_ADDRESS}</span>
+        </li>
+        <li class="flex items-center">
+          <Phone size={20} class="text-brand-primary-light mr-3 shrink-0" />
+          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" class="text-brand-light/80 hover:text-brand-primary-light transition-colors">WhatsApp Kami</a>
+        </li>
+        <li class="flex items-center">
+          <Mail size={20} class="text-brand-primary-light mr-3 shrink-0" />
+          <a href={`mailto:${GYM_EMAIL}`} class="text-brand-light/80 hover:text-brand-primary-light transition-colors">{GYM_EMAIL}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="container-brand pt-8 border-t border-white/10 text-center text-sm text-brand-light/60 flex flex-col md:flex-row justify-between items-center">
+    <p>&copy; {new Date().getFullYear()} {GYM_NAME}. Hak cipta dilindungi.</p>
+    <p class="mt-2 md:mt-0">Dibuat dengan ❤️ untuk wanita Banjarmasin</p>
+  </div>
+</footer>

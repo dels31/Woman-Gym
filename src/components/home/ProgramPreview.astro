@@ -1,0 +1,89 @@
+---
+import { ArrowRight, Clock, Activity } from 'lucide-react';
+
+const programs = [
+  {
+    title: 'Fat Loss Blueprint',
+    duration: '60 Menit',
+    level: 'Pemula',
+    description: 'Program kardio intensitas sedang yang dirancang khusus untuk pembakaran kalori maksimal pada anatomi wanita.',
+    image: 'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?q=80&w=400&h=300&fit=crop'
+  },
+  {
+    title: 'Booty & Core Building',
+    duration: '45 Menit',
+    level: 'Menengah',
+    description: 'Fokus pada pembentukan otot gluteus, penguatan perut, dan meratakan postur tubuh.',
+    image: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=400&h=300&fit=crop'
+  },
+  {
+    title: 'Zumba & Aerobik',
+    duration: '60 Menit',
+    level: 'Semua Level',
+    description: 'Kelas grup menyenangkan dengan musik upbeat. Lepaskan stress sambil membakar lemak tubuh.',
+    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=400&h=300&fit=crop'
+  },
+  {
+    title: 'Private 1-on-1 Coaching',
+    duration: '90 Menit',
+    level: 'Custom',
+    description: 'Sesi latihan dan bimbingan nutrisi langsung didampingi personal trainer profesional kami.',
+    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&h=300&fit=crop'
+  }
+];
+---
+
+<section class="section-padding bg-brand-light">
+  <div class="container-brand">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div class="max-w-2xl">
+        <h2 class="text-sm font-bold text-brand-primary tracking-wider uppercase mb-2">Program Latihan</h2>
+        <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-4">Kelas & Program Terpopuler</h3>
+      </div>
+      <a href="/program" class="hidden md:inline-flex items-center text-brand-primary font-medium hover:text-brand-primary-light transition-colors group">
+        Lihat Semua Program 
+        <ArrowRight size={18} class="ml-1 group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+
+    <div class="flex overflow-x-auto pb-8 -mx-4 px-4 md:mx-0 md:px-0 gap-6 snap-x hide-scrollbar">
+      {programs.map((program) => (
+        <div class="min-w-[280px] md:min-w-[340px] flex-none bg-white rounded-2xl overflow-hidden shadow-brand-sm hover:shadow-brand-md transition-shadow snap-start border border-gray-100 group">
+          <div class="relative h-48 overflow-hidden">
+            <img src={program.image} alt={program.title} loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-brand-dark text-xs font-bold px-3 py-1 rounded-full">
+              {program.level}
+            </div>
+          </div>
+          <div class="p-6">
+            <h4 class="text-xl font-bold font-display text-brand-dark mb-2">{program.title}</h4>
+            <div class="flex items-center gap-4 mb-4 text-xs text-brand-body/80">
+              <span class="flex items-center"><Clock size={14} class="mr-1" /> {program.duration}</span>
+              <span class="flex items-center"><Activity size={14} class="mr-1" /> {program.level}</span>
+            </div>
+            <p class="text-brand-body text-sm leading-relaxed mb-6">{program.description}</p>
+            <a href="/program" class="text-sm font-medium text-brand-primary group-hover:text-brand-primary-light transition-colors flex items-center">
+              Selengkapnya <ArrowRight size={16} class="ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-4 md:hidden text-center">
+      <a href="/program" class="inline-flex items-center text-brand-primary font-medium">
+        Lihat Semua Program <ArrowRight size={18} class="ml-1" />
+      </a>
+    </div>
+  </div>
+  
+  <style>
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</section>

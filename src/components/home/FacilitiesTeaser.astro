@@ -1,0 +1,43 @@
+---
+import { ArrowRight } from 'lucide-react';
+
+const facilities = [
+  { id: 1, name: 'Cardio Area', image: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=600&h=400&fit=crop', colSpan: 'md:col-span-2', rowSpan: 'md:row-span-2' },
+  { id: 2, name: 'Strength Area', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&h=400&fit=crop', colSpan: 'col-span-1', rowSpan: 'row-span-1' },
+  { id: 3, name: 'Studio Kelas', image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=400&h=400&fit=crop', colSpan: 'col-span-1', rowSpan: 'row-span-1' },
+  { id: 4, name: 'Locker & Sauna', image: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=800&h=400&fit=crop', colSpan: 'md:col-span-2', rowSpan: 'row-span-1' },
+];
+---
+
+<section class="section-padding bg-brand-light">
+  <div class="container-brand">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div class="max-w-2xl">
+        <h2 class="text-sm font-bold text-brand-primary tracking-wider uppercase mb-2">Fasilitas Kami</h2>
+        <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-4">Ruang Nyaman Untuk Berkeringat</h3>
+      </div>
+      <a href="/fasilitas" class="hidden md:inline-flex items-center text-brand-primary font-medium hover:text-brand-primary-light transition-colors group">
+        Lihat Semua Fasilitas
+        <ArrowRight size={18} class="ml-1 group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
+      {facilities.map((f) => (
+        <a href="/fasilitas" class={`relative rounded-2xl overflow-hidden group ${f.colSpan} ${f.rowSpan} h-64 md:h-auto block cursor-pointer`}>
+          <img src={f.image} alt={f.name} loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-brand-dark/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+          <div class="absolute bottom-6 left-6">
+            <h4 class="text-white font-display font-bold text-xl">{f.name}</h4>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-8 md:hidden text-center">
+      <a href="/fasilitas" class="inline-flex items-center text-brand-primary font-medium">
+        Lihat Semua Fasilitas <ArrowRight size={18} class="ml-1" />
+      </a>
+    </div>
+  </div>
+</section>
